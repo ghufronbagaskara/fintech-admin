@@ -1,6 +1,6 @@
 # Qigo Admin
 
-Admin dashboard buat monitoring & kelola merchant, transaksi, harga emas, withdrawal, dan audit log fintech Qigo. React + TypeScript + Vite, data dari Supabase.
+Admin dashboard buat monitoring & kelola merchant, transaksi, harga emas, dan audit log fintech Qigo. React + TypeScript + Vite, data dari Supabase.
 
 ## Setup
 
@@ -12,7 +12,7 @@ npm run dev
 
 ## Migrasi database
 
-Jalankan `sql/001_admin_dashboard.sql` di Supabase SQL Editor sebelum pakai fitur withdrawal, audit log, dan suspend merchant.
+Jalankan `sql/001_admin_dashboard.sql` di Supabase SQL Editor sebelum pakai fitur audit log dan suspend merchant.
 
 ## Scripts
 
