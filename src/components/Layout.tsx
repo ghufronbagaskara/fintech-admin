@@ -7,7 +7,6 @@ const nav = [
   { to: '/gold-rate', label: 'Gold Rate' },
   { to: '/merchants', label: 'Merchants' },
   { to: '/transactions', label: 'Transactions' },
-  { to: '/withdrawals', label: 'Withdrawals' },
   { to: '/audit-log', label: 'Audit Log' },
 ]
 
