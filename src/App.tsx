@@ -8,7 +8,6 @@ import { GoldRatePage } from './pages/GoldRatePage'
 import { MerchantsPage } from './pages/MerchantsPage'
 import { MerchantDetailPage } from './pages/MerchantDetailPage'
 import { TransactionsPage } from './pages/TransactionsPage'
-import { WithdrawalsPage } from './pages/WithdrawalsPage'
 import { AuditLogPage } from './pages/AuditLogPage'
 
 export default function App() {
@@ -24,7 +23,6 @@ export default function App() {
               <Route path="/merchants" element={<MerchantsPage />} />
               <Route path="/merchants/:id" element={<MerchantDetailPage />} />
               <Route path="/transactions" element={<TransactionsPage />} />
-              <Route path="/withdrawals" element={<WithdrawalsPage />} />
               <Route path="/audit-log" element={<AuditLogPage />} />
             </Route>
           </Route>

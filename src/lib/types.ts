@@ -43,20 +43,6 @@ export interface GoldPrice {
   updated_at: string
 }
 
-export interface Withdrawal {
-  id: number
-  merchant_id: number
-  amount: number
-  bank_name: string
-  bank_account_number: string
-  bank_account_name: string
-  status: 'pending' | 'approved' | 'rejected' | 'completed'
-  admin_email: string | null
-  note: string | null
-  requested_at: string
-  processed_at: string | null
-}
-
 export interface AuditLog {
   id: number
   admin_email: string

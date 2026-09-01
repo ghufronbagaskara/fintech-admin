@@ -10,25 +10,6 @@ ALTER TABLE public.merchant
 -- check is_suspended. A suspended merchant can still log in until
 -- pkl_fintech/backend/index.js rejects login when is_suspended = true.
 
--- Withdrawal requests, separate from the app's instant withdraw_balance_tx RPC.
-CREATE TABLE IF NOT EXISTS public.withdrawal (
-  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  merchant_id integer NOT NULL REFERENCES public.merchant(id),
-  amount numeric NOT NULL CHECK (amount > 0),
-  bank_name text NOT NULL,
-  bank_account_number text NOT NULL,
-  bank_account_name text NOT NULL,
-  status text NOT NULL DEFAULT 'pending'
-    CHECK (status IN ('pending', 'approved', 'rejected', 'completed')),
-  admin_email text,
-  note text,
-  requested_at timestamptz NOT NULL DEFAULT now(),
-  processed_at timestamptz
-);
-
-CREATE INDEX IF NOT EXISTS withdrawal_merchant_id_idx ON public.withdrawal(merchant_id);
-CREATE INDEX IF NOT EXISTS withdrawal_status_idx ON public.withdrawal(status);
-
 -- Every admin action that touches money or merchant state writes one row here.
 CREATE TABLE IF NOT EXISTS public.audit_log (
   id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -52,7 +33,6 @@ ALTER TABLE public.installment    ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.transaksi      ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.bank_account   ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.gold_price     ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.withdrawal     ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.audit_log      ENABLE ROW LEVEL SECURITY;
 
 DO $$
@@ -60,7 +40,7 @@ DECLARE
   t text;
 BEGIN
   FOREACH t IN ARRAY ARRAY['merchant','merchant_token','balance','installment',
-                            'transaksi','bank_account','gold_price','withdrawal','audit_log']
+                            'transaksi','bank_account','gold_price','audit_log']
   LOOP
     EXECUTE format(
       'DROP POLICY IF EXISTS admin_full_access ON public.%I;', t
